@@ -2,13 +2,14 @@ module.exports = {
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      screens: {
+        'xs': '380px'
+      }
     },
     fontFamily: {
       sans: ['Dhyana']
     },
-    fontsize: {
-
-    }
+    fontsize: {}
   },
   variants: {
     backgroundColor: ['responsive, active', 'hover'],
