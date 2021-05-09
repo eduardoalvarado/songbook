@@ -2,7 +2,7 @@
   <div>
     <finder />
     <div class="mt-14 height-calc overflow-hidden overflow-y-scroll">
-      <div class="h-full xs:flex xs:flex-wrap content-stretch">
+      <div class="h-full xs:flex xs:flex-wrap">
         <song-item />
         <song-item />
         <song-item />
