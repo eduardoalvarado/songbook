@@ -25,7 +25,7 @@ export default defineComponent({
   setup() {
     const title:any = inject('mutation')
     title.setTitlePage('Cancionero')
-
+    title.setSubTitlePage('')
     onMounted(() => {})
     return { title }
   }

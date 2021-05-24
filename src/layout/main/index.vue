@@ -1,7 +1,8 @@
 <template>
   <div class="">
     <div class="px-6 pt-10 h-full">
-      <div class="text-2xl mb-12">{{ titlePage }}</div>
+      <div class="text-2xl">{{ titlePage }}</div>
+      <div class="text-lg mb-8">{{ subTitlePage }}</div>
       <router-view />
     </div>
     <!--menu-->
@@ -22,6 +23,7 @@ export default defineComponent({
   setup() {
     provide('mutation', mutation)
     const titlePage = computed(() => hookStore.titlePage)
+    const subTitlePage = computed(() => hookStore.subTitlePage)
     const menuItems:Array<NavbarModel> = reactive([])
 
     const buildMenu = () => {
@@ -32,10 +34,10 @@ export default defineComponent({
     }
     onMounted(() => {
       buildMenu()
-      console.log('array', menuItems)
     })
     return {
       titlePage,
+      subTitlePage,
       menuItems
     }
   }
