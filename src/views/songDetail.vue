@@ -40,6 +40,8 @@
 
 <script lang="ts">
 import {defineComponent, inject, onMounted, ref} from 'vue'
+import SongService from '@/services/songService'
+
 export default defineComponent({
   name: 'songDetail',
   setup() {
@@ -60,7 +62,13 @@ export default defineComponent({
     }
     onMounted(() => {
       getScrollPosition((<HTMLElement><any>scrollContainer.value))
+      requestGetSong('60b5b42a3ac5cb5e23c8851d')
     })
+
+    const requestGetSong = async (id:string) => {
+      const response = await SongService.getSong(id)
+      console.log('response graphql', response)
+    }
     return {
       getScrollPosition,
       scrollContainer,
