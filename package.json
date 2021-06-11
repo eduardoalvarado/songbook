@@ -4,13 +4,16 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --port 8080",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "start": "node server/server.js"
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^3.0.0-3",
     "core-js": "^3.6.5",
+    "express": "^4.17.1",
     "register-service-worker": "^1.7.1",
+    "server-static": "^2.0.5",
     "vue": "^3.0.0",
     "vue-element-loading": "^3.0.1",
     "vue-router": "^4.0.0-0",
