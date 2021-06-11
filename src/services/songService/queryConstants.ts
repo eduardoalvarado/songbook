@@ -4,11 +4,10 @@ export const queryConstants = {
       operationName: null,
       query: `{
         getSongs {
-          title,
-          author,
-          verse{
-            paragraph
-          }
+          _id
+          title
+          author
+          gender
           createdAt
         }
       }`
@@ -19,8 +18,11 @@ export const queryConstants = {
         getSongById(id: $id){
          title
          author
+         gender
          verse{
+           order
            type
+           paragraph
           }
         }
       }`,
