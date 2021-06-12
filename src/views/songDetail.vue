@@ -26,7 +26,7 @@
           :key="index"
         >
           <span class="font-medium pb-5 block uppercase">{{ item.type }}</span>
-          <div v-html="paragraphSong"></div>
+          <div v-html="buildParagraph(item.paragraph)"></div>
         </div>
       </div>
     </div>
@@ -111,14 +111,10 @@ export default defineComponent({
       storeTitle.setTitlePage(itemSong.value.title)
       storeTitle.setSubTitlePage(itemSong.value.author)
       loadingSongs.value = false
-      buildParagraph()
     }
-    const buildParagraph = () => {
-      itemSong.value.verse.forEach((item: any) => {
-        paragraphSong.value = item.paragraph.replace(/(\\r)*\/n/g, '<br>')
-      })
+    const buildParagraph = (item:any) => {
+        return item.replace(/(\\r)*\/n/g, '<br>')
     }
-    //.replace(/(\\r)*\/n/g, '<br>')
     return {
       getScrollPosition,
       scrollContainer,
@@ -126,7 +122,7 @@ export default defineComponent({
       songContent,
       itemSong,
       loadingSongs,
-      paragraphSong,
+      buildParagraph,
       unresolvedSong
     }
   }
