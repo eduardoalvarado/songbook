@@ -1,0 +1,21 @@
+@import '../assets/fonts/line.css';
+
+@layer base {
+  @font-face {
+    font-family: Dhyana;
+    font-weight: normal;
+    src: url('../assets/fonts/dhyana/Dhyana-Regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: Dhyana;
+    font-weight: bold;
+    src: url('../assets/fonts/dhyana/Dhyana-Bold.ttf') format('truetype');
+  }
+}
+
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+@tailwind utilities;
+
