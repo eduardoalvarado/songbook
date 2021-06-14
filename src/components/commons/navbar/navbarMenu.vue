@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-20 fixed bottom-0 bg-sb-blue-100 text-sb-primary-200">
+  <div class="w-full h-20 fixed bottom-0 bg-white text-sb-primary-200 shadow-top z-index-up">
     <div class="flex justify-center h-full">
       <router-link
         v-for="item in menuItems"
@@ -8,13 +8,13 @@
         :class="'order-'+item.order"
         :key="item"
       >
-        <font-awesome-icon :icon="item.iconName" class="fa-2x" />
+        <i class="text-2xl" :class="['uil', item.iconName]"></i>
       </router-link>
     </div>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import {computed, defineComponent, ref} from 'vue'
 import { useStore } from 'vuex'
 export default defineComponent({
@@ -33,7 +33,13 @@ export default defineComponent({
 </script>
 
 <style scoped lang="css">
-.router-link-active {
+.router-link-exact-active {
   @apply text-sb-secondary-100;
+}
+.shadow-top {
+  box-shadow: 0 -4px 20px -4px rgba(0,0,0,0.25);
+}
+.z-index-up {
+  z-index: 3001;
 }
 </style>

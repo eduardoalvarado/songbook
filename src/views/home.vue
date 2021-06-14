@@ -1,17 +1,17 @@
 <template>
   <div>
-    <finder />
-    <div class="mt-14 height-calc overflow-hidden overflow-y-scroll">
+    <finder @songString="songString" />
+    <div class="mt-8 height-calc overflow-hidden overflow-y-scroll">
       <vue-loading
-          :active="loadingSongs"
-          spinner="spinner"
-          duration="1.5"
-          color="#4f4f4f"
-          background-color="rgba(219, 233, 246, 1)"
-          size="50"
+        :active="loadingSongs"
+        spinner="spinner"
+        duration="1.5"
+        color="#4f4f4f"
+        background-color="rgba(255, 255, 255, 1)"
+        size="50"
       />
-      <div v-if="songs.length" class="h-full xs:flex xs:flex-wrap">
-        <song-item v-for="(song, index) in songs" :key="index"  :song="song"/>
+      <div v-if="songs.length" class="xs:flex xs:flex-wrap">
+        <song-item v-for="(song, index) in songs" :key="index" :song="song" />
       </div>
       <div v-else class="h-full flex items-center justify-center">
         <div class="text-center">
@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, inject, onMounted, ref} from 'vue'
+import { computed, defineComponent, inject, onMounted, ref } from 'vue'
 import finder from '@/components/home/finder.vue'
 import SongItem from '@/components/home/songItem.vue'
 import SongService from '@/services/songService'
@@ -50,18 +50,28 @@ export default defineComponent({
       songs.value = getSongs
       loadingSongs.value = false
     }
+    const songString = async (str: string) => {
+      loadingSongs.value = true
+      const {
+        data: {
+          data: { getSongByAttr }
+        }
+      } = await SongService.getSongByString(str)
+      songs.value = getSongByAttr
+      loadingSongs.value = false
+    }
 
     onMounted(() => {
       requestGetSongs()
     })
 
-    return { title, songs, loadingSongs }
+    return { title, songs, loadingSongs, songString }
   }
 })
 </script>
 
 <style scoped lang="css">
 .height-calc {
-  height: calc(100vh - 288px);
+  height: calc(100vh - 234px);
 }
 </style>

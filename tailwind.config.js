@@ -8,7 +8,8 @@ module.exports = {
       colors: {
         'sb-primary': {
           '100': '#5451D6',
-          '200': '#112556'
+          '200': '#0B3A83',
+          '300': '#112556'
         },
         'sb-secondary': {
           '100': '#21D2FF'

@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-sb-blue-100 text-sb-primary-200">
-    <div class="px-6 pt-10 h-full">
+  <div class="text-sb-primary-300">
+    <div class="px-6 pt-6 h-full">
       <div class="text-2xl font-bold">{{ titlePage }}</div>
-      <div class="text-lg mb-8">{{ subTitlePage }}</div>
+      <div class="text-lg mb-4">{{ subTitlePage }}</div>
       <router-view />
     </div>
     <!--menu-->

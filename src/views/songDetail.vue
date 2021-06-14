@@ -1,21 +1,25 @@
 <template>
-  <div class="container-song relative bg-sb-blue-100" ref="containerSong">
+  <div class="container-song bg-white" ref="containerSong">
     <vue-loading
       :active="loadingSongs"
       spinner="spinner"
       duration="1.5"
       color="#4f4f4f"
-      background-color="rgba(219, 233, 246, 1)"
+      background-color="rgba(255, 255, 255, 1)"
       size="50"
     />
-    <div v-if="unresolvedSong" class="w-full h-64 flex items-center justify-center">
+    <div
+      v-if="unresolvedSong"
+      class="w-full h-64 flex items-center justify-center"
+    >
       <div class="text-center w-3/4 ">
-        <p class="font-bold text-2xl">No ha seleccionado ninguna canción!!!</p>
+        <p class="font-bold text-2xl">La canción no existe!!!</p>
         <p>Debe seleccionar una canción para poder visualizarla aquí</p>
       </div>
     </div>
     <div
-      class="height-calc px-3 overflow-hidden overflow-y-scroll text-center"
+      class="px-3 overflow-hidden overflow-y-scroll text-center"
+      :class="{'height-calc': !unresolvedSong}"
       ref="scrollContainer"
       @scroll="getScrollPosition($refs.scrollContainer)"
     >
@@ -112,8 +116,8 @@ export default defineComponent({
       storeTitle.setSubTitlePage(itemSong.value.author)
       loadingSongs.value = false
     }
-    const buildParagraph = (item:any) => {
-        return item.replace(/(\\r)*\/n/g, '<br>')
+    const buildParagraph = (item: any) => {
+      return item.replace(/(\\r)*\/n/g, '<br>')
     }
     return {
       getScrollPosition,
@@ -131,9 +135,9 @@ export default defineComponent({
 
 <style scoped lang="css">
 .height-calc {
-  height: calc(100vh - 210px);
+  height: calc(100vh - 180px);
 }
-.container-song {
+/*.container-song {
   --is-visible: block;
 }
 .container-song::before {
@@ -164,5 +168,5 @@ export default defineComponent({
     rgba(219, 233, 246, 1) 10%,
     rgba(219, 233, 246, 0) 100%
   );
-}
+}*/
 </style>

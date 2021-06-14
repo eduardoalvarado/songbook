@@ -1,3 +1,5 @@
+@import '../assets/fonts/line.css';
+
 @layer base {
   @font-face {
     font-family: Dhyana;

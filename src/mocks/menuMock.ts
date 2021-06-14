@@ -1,12 +1,17 @@
 export const menuMock = [
   {
     redirectTo: 'home',
-    iconName: 'home',
+    iconName: 'uil-estate',
     order: 1
   },
   {
     redirectTo: 'song',
-    iconName: 'book-open',
+    iconName: 'uil-book-open',
+    order: 2
+  },
+  {
+    redirectTo: 'login',
+    iconName: 'uil-user',
     order: 2
   }
 ]

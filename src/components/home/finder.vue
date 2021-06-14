@@ -1,21 +1,36 @@
 <template>
-  <div class="rounded-xl border border-sb-blue-200 bg-gray-100 flex w-full" >
-    <input
-      class="w-full h-12 bg-transparent focus:outline-none pl-4 leading-snug"
-      type="text"
-      disabled
-    />
-    <div class="w-12 flex items-center justify-center text-gray-300">
-      <font-awesome-icon icon="search" />
+  <div class="rounded-3xl border bg-gray-200 flex w-full" >
+    <div class="w-12 flex items-center justify-center">
+      <i class="uil uil-search text-xl"/>
     </div>
+    <input
+      class="w-full h-12 bg-transparent focus:outline-none pr-4 leading-snug"
+      type="text"
+      placeholder="Busca una canción"
+      v-model="songString"
+      @input="searchSongs"
+    />
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script lang="ts">
+import {computed, defineComponent, ref} from 'vue'
 
 export default defineComponent({
-  name: 'finder'
+  name: 'finder',
+  setup(props, { emit }) {
+    const songString = ref('')
+    const searchSongs = () => {
+      //if(songString.value.length > 3) {
+        emit('songString', songString.value)
+      //}
+    }
+
+    return {
+      searchSongs,
+      songString
+    }
+  }
 })
 </script>
 

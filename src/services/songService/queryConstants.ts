@@ -27,6 +27,19 @@ export const queryConstants = {
         }
       }`,
       variables: {}
+    },
+    getSongByString: {
+      operationName: null,
+      query:`query($attr: String!) {
+        getSongByAttr(attr: $attr) {
+          _id
+          title
+          author
+          gender
+          createdAt
+        }
+      }`,
+      variables: {}
     }
   }
 }

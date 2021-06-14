@@ -16,6 +16,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/songDetail/:id',
         name: 'song',
         component: () => import(/* webpackChunkName: "songDetail" */ '@/views/songDetail.vue')
+      },
+      {
+        path: '/login',
+        name: 'login',
+        redirect: 'home'
       }
     ]
   }
