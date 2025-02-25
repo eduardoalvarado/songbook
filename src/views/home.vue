@@ -10,7 +10,7 @@
         background-color="rgba(255, 255, 255, 1)"
         size="50"
       />
-      <div v-if="songs.length" class="xs:flex xs:flex-wrap">
+      <div v-if="songs.length" class="mb-8 xs:flex xs:flex-wrap">
         <song-item v-for="(song, index) in songs" :key="index" :song="song" />
       </div>
       <div v-else class="h-full flex items-center justify-center">

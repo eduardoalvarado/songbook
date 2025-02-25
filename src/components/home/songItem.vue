@@ -34,7 +34,6 @@ export default defineComponent({
       store.state.songID = songID
     }
     return {
-      //song,
       gotoSong
     }
   }
@@ -46,16 +45,16 @@ export default defineComponent({
   min-height: 196px;
 }
 .dynamical-font {
-  font-size: 7vw;
+  font-size: 6vw;
 }
-@media (min-width: 410px) {
+@media (min-width: 380px) {
   .dynamical-font-xs {
-    font-size: 5vw;
+    font-size: 4vw;
   }
 }
 @media (min-width: 640px) {
-  .dynamical-font-sm {
-    font-size: 4vw;
+  .dynamical-font {
+    font-size: 20px;
   }
 }
 

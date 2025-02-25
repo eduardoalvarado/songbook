@@ -1,6 +1,6 @@
 <template>
   <div class="rounded-3xl border bg-gray-200 flex w-full" >
-    <div class="w-12 flex items-center justify-center">
+    <div class="w-16 flex items-center justify-center">
       <i class="uil uil-search text-xl"/>
     </div>
     <input
