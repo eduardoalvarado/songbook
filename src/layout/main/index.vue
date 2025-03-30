@@ -6,44 +6,38 @@
       <router-view />
     </div>
     <!--menu-->
-    <navbar-menu :menu-items="menuItems"/>
+    <navbar-menu :menu-items="menuItems" />
   </div>
 </template>
 
-<script lang="ts">
-import {computed, defineComponent, onMounted, provide, reactive, ref} from "vue";
+<script lang="ts" setup>
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+} from 'vue'
 import { hookStore, mutation } from '@/hooks/hookStore'
-import NavbarMenu from "@/components/commons/navbar/navbarMenu.vue";
+import NavbarMenu from '@/components/commons/navbar/navbarMenu.vue'
 import { NavbarModel } from '@/models/navbarModel'
 import { menuMock } from '@/mocks/menuMock'
 
-export default defineComponent({
-  name: 'Main',
-  components: {NavbarMenu},
-  setup() {
-    provide('mutation', mutation)
-    const titlePage = computed(() => hookStore.titlePage)
-    const subTitlePage = computed(() => hookStore.subTitlePage)
-    const menuItems:Array<NavbarModel> = reactive([])
+provide('mutation', mutation)
+const titlePage = computed(() => hookStore.titlePage)
+const subTitlePage = computed(() => hookStore.subTitlePage)
+const menuItems: Array<NavbarModel> = reactive([])
 
-    const buildMenu = () => {
-      menuMock.forEach((item) => {
-        let menuOption = new NavbarModel(item.redirectTo, item.iconName, item.order)
-        menuItems.push(menuOption)
-      })
-    }
-    onMounted(() => {
-      buildMenu()
-    })
-    return {
-      titlePage,
-      subTitlePage,
-      menuItems
-    }
-  }
+const buildMenu = () => {
+  menuMock.forEach((item) => {
+    let menuOption = new NavbarModel(item.redirectTo, item.iconName, item.order)
+    menuItems.push(menuOption)
+  })
+}
+onMounted(() => {
+  buildMenu()
 })
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

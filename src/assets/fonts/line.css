@@ -1,6 +1,6 @@
 @font-face {
   font-family: unicons-line;
-  src: url(../fonts/line/unicons-line.ttf) format('truetype');
+  src: url('@/assets/fonts/line/unicons-line.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
@@ -9,7 +9,6 @@
   font-family: unicons-line;
   font-style: normal;
   font-weight: 400;
-  speak: none;
   display: inline-block;
   text-decoration: inherit;
   font-variant: normal;

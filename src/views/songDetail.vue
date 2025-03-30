@@ -12,14 +12,14 @@
       v-if="unresolvedSong"
       class="w-full h-64 flex items-center justify-center"
     >
-      <div class="text-center w-3/4 ">
+      <div class="text-center w-3/4">
         <p class="font-bold text-2xl">La canción no existe!!!</p>
         <p>Debe seleccionar una canción para poder visualizarla aquí</p>
       </div>
     </div>
     <div
       class="px-3 overflow-hidden overflow-y-scroll text-center"
-      :class="{'height-calc': !unresolvedSong}"
+      :class="{ 'height-calc': !unresolvedSong }"
       ref="scrollContainer"
       @scroll="getScrollPosition($refs.scrollContainer)"
     >
@@ -37,7 +37,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import {
   computed,
   defineComponent,
@@ -45,92 +45,70 @@ import {
   nextTick,
   onMounted,
   reactive,
-  ref
+  ref,
 } from 'vue'
 import SongService from '@/services/songService'
 import { useRoute } from 'vue-router'
 import vueLoading from 'vue-element-loading'
 
-export default defineComponent({
-  name: 'songDetail',
-  components: { vueLoading },
-  data() {
-    return {
-      isMounted: false
-    }
-  },
-  mounted() {
-    this.isMounted = true
-  },
-  setup() {
-    const route: any = useRoute()
-    const INITIAL_POS = 0
-    const scrollContainer = ref(null)
-    const containerSong = ref(null)
-    const songContent = ref(null)
-    const storeTitle: any = inject('mutation')
-    const paragraphSong = ref(null)
-    const itemSong = ref({
-      title: '',
-      author: '',
-      verse: [
-        {
-          type: '',
-          paragraph: ''
-        }
-      ]
-    })
-    const loadingSongs = ref(false)
-    const unresolvedSong = ref(false)
-
-    const getScrollPosition = (el: HTMLElement) => {
-      let visibleStyle = 'block'
-      if (el.scrollTop === INITIAL_POS) {
-        visibleStyle = 'none'
-      }
-      ;(<HTMLElement>(<any>containerSong.value)).style.setProperty(
-        '--is-visible',
-        visibleStyle
-      )
-    }
-    onMounted(() => {
-      getScrollPosition(<HTMLElement>(<any>scrollContainer.value))
-      requestGetSong(route.params.id)
-    })
-
-    const requestGetSong = async (id: string) => {
-      loadingSongs.value = true
-      try {
-        const {
-          data: {
-            data: { getSongById }
-          }
-        } = await SongService.getSong(id)
-        itemSong.value = getSongById
-      } catch (e) {
-        loadingSongs.value = false
-        unresolvedSong.value = true
-      }
-
-      storeTitle.setTitlePage(itemSong.value.title)
-      storeTitle.setSubTitlePage(itemSong.value.author)
-      loadingSongs.value = false
-    }
-    const buildParagraph = (item: any) => {
-      return item.replace(/(\\r)*\/n/g, '<br>')
-    }
-    return {
-      getScrollPosition,
-      scrollContainer,
-      containerSong,
-      songContent,
-      itemSong,
-      loadingSongs,
-      buildParagraph,
-      unresolvedSong
-    }
-  }
+const route: any = useRoute()
+const INITIAL_POS = 0
+const scrollContainer = ref(null)
+const containerSong = ref(null)
+const songContent = ref(null)
+const storeTitle: any = inject('mutation')
+const paragraphSong = ref(null)
+const itemSong = ref({
+  title: '',
+  author: '',
+  verse: [
+    {
+      type: '',
+      paragraph: '',
+    },
+  ],
 })
+const loadingSongs = ref(false)
+const unresolvedSong = ref(false)
+const isMounted = ref(false)
+
+const getScrollPosition = (el: HTMLElement) => {
+  let visibleStyle = 'block'
+  if (el.scrollTop === INITIAL_POS) {
+    visibleStyle = 'none'
+  }
+  ;(<HTMLElement>(<any>containerSong.value)).style.setProperty(
+    '--is-visible',
+    visibleStyle,
+  )
+}
+onMounted(() => {
+  isMounted.value = true
+  getScrollPosition(<HTMLElement>(<any>scrollContainer.value))
+  requestGetSong(route.params.id)
+})
+
+const requestGetSong = async (id: string) => {
+  loadingSongs.value = true
+  try {
+    const {
+      data: {
+        data: { getSongById },
+      },
+    } = await SongService.getSong(id)
+    itemSong.value = getSongById
+  } catch (e) {
+    loadingSongs.value = false
+    unresolvedSong.value = true
+  }
+
+  storeTitle.setTitlePage(itemSong.value.title)
+  storeTitle.setSubTitlePage(itemSong.value.author)
+  loadingSongs.value = false
+}
+const buildParagraph = (item: any) => {
+  return item.replace(/(\\r)*\/n/g, '<br>')
+}
 </script>
 
 <style scoped lang="css">

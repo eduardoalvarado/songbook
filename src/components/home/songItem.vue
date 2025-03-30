@@ -4,7 +4,9 @@
       @click="gotoSong(song._id)"
       class="bg-sb-primary-300 py-4 px-5 rounded-3xl flex flex-col min-height text-white"
     >
-      <h1 class="dynamical-font dynamical-font-xs dynamical-font-sm font-bold">{{ song.title }}</h1>
+      <h1 class="dynamical-font dynamical-font-xs dynamical-font-sm font-bold">
+        {{ song.title }}
+      </h1>
       <p class="flex-grow text-sb-blue-200">{{ song.gender }}</p>
       <p class="flex">
         <i class="uil uil-pen mr-2" />
@@ -14,30 +16,23 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue'
-import router from "@/router";
+import router from '@/router'
 import { useStore } from 'vuex'
 
-export default defineComponent({
-  name: 'songItem',
-  props: {
-    song: {
-      type: Object,
-      required: true
-    }
+const props = defineProps({
+  song: {
+    type: Object,
+    required: true,
   },
-  setup(props) {
-    const store = useStore()
-    const gotoSong = (songID:string) => {
-      router.push({ name: 'song', params: { id: songID } })
-      store.state.songID = songID
-    }
-    return {
-      gotoSong
-    }
-  }
 })
+
+const store = useStore()
+const gotoSong = (songID: string) => {
+  router.push({ name: 'song', params: { id: songID } })
+  store.state.songID = songID
+}
 </script>
 
 <style scoped lang="css">
@@ -57,5 +52,4 @@ export default defineComponent({
     font-size: 20px;
   }
 }
-
 </style>

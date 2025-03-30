@@ -23,50 +23,42 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { computed, defineComponent, inject, onMounted, ref } from 'vue'
 import finder from '@/components/home/finder.vue'
 import SongItem from '@/components/home/songItem.vue'
 import SongService from '@/services/songService'
 import vueLoading from 'vue-element-loading'
 
-export default defineComponent({
-  name: 'Home',
-  components: { SongItem, finder, vueLoading },
-  setup() {
-    const title: any = inject('mutation')
-    title.setTitlePage('Cancionero')
-    title.setSubTitlePage('')
-    const songs = ref([])
-    const loadingSongs = ref(false)
+const title: any = inject('mutation')
+title.setTitlePage('Cancionero')
+title.setSubTitlePage('')
+const songs = ref([])
+const loadingSongs = ref(false)
 
-    const requestGetSongs = async () => {
-      loadingSongs.value = true
-      const {
-        data: {
-          data: { getSongs }
-        }
-      } = await SongService.getAllSongs()
-      songs.value = getSongs
-      loadingSongs.value = false
-    }
-    const songString = async (str: string) => {
-      loadingSongs.value = true
-      const {
-        data: {
-          data: { getSongByAttr }
-        }
-      } = await SongService.getSongByString(str)
-      songs.value = getSongByAttr
-      loadingSongs.value = false
-    }
+const requestGetSongs = async () => {
+  loadingSongs.value = true
+  const {
+    data: {
+      data: { getSongs },
+    },
+  } = await SongService.getAllSongs()
+  songs.value = getSongs
+  loadingSongs.value = false
+}
+const songString = async (str: string) => {
+  loadingSongs.value = true
+  const {
+    data: {
+      data: { getSongByAttr },
+    },
+  } = await SongService.getSongByString(str)
+  songs.value = getSongByAttr
+  loadingSongs.value = false
+}
 
-    onMounted(() => {
-      requestGetSongs()
-    })
-
-    return { title, songs, loadingSongs, songString }
-  }
+onMounted(() => {
+  requestGetSongs()
 })
 </script>
 

@@ -21,17 +21,12 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent, inject, onMounted } from 'vue'
 
-export default defineComponent({
-  name: 'login',
-  setup() {
-    const storeTitle: any = inject('mutation')
-    onMounted(() => {
-      storeTitle.setTitlePage('')
-    })
-  }
+const storeTitle: any = inject('mutation')
+onMounted(() => {
+  storeTitle.setTitlePage('')
 })
 </script>
 
